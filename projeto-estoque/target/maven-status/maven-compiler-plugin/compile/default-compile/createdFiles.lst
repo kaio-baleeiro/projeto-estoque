@@ -1,0 +1,4 @@
+br\com\estoque\ConectarBanco.class
+br\com\estoque\Produto.class
+br\com\estoque\Alimentos.class
+br\com\estoque\Bebidas.class
