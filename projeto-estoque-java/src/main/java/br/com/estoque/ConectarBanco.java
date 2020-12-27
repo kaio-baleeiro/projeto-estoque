@@ -1,4 +1,3 @@
-
 package br.com.estoque;
 
 import org.apache.commons.dbcp2.BasicDataSource;
@@ -21,5 +20,7 @@ public class ConectarBanco {
         dataSource.setPassword(PASSWORD);
 
         jdbcTemplate = new JdbcTemplate(dataSource);
+        
+        System.out.println("Connected database");
     }
 }

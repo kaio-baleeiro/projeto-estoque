@@ -1,11 +1,11 @@
 package br.com.estoque;
 
-public abstract class Produto {
+public class Produto {
     protected Integer idProduto;
     protected String Nome;
-    protected String categoria;
+    protected Integer fkCategoria;
     protected Double valorProduto;
-    protected Integer limiteMin; 
+    protected Integer limiteMin;
 
     public Integer getIdProduto() {
         return idProduto;
@@ -23,12 +23,12 @@ public abstract class Produto {
         this.Nome = Nome;
     }
 
-    public String getCategoria() {
-        return categoria;
+    public Integer getFkCategoria() {
+        return fkCategoria;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setFkCategoria(Integer fkCategoria) {
+        this.fkCategoria = fkCategoria;
     }
 
     public Double getValorProduto() {
@@ -45,6 +45,10 @@ public abstract class Produto {
 
     public void setLimiteMin(Integer limiteMin) {
         this.limiteMin = limiteMin;
+    }
+    
+    public String toString() {
+        return this.Nome;
     }
     
     public final String getAlert() {
