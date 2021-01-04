@@ -13,14 +13,18 @@ public class ConectarBanco {
     protected final static String PASSWORD = "bandtec";
 
     public void conectar(){
-        dataSource = new BasicDataSource();
-        dataSource.setDriverClassName(DRIVE);
-        dataSource.setUrl(URL);
-        dataSource.setUsername(USERNAME);
-        dataSource.setPassword(PASSWORD);
+        try{
+            dataSource = new BasicDataSource();
+            dataSource.setDriverClassName(DRIVE);
+            dataSource.setUrl(URL);
+            dataSource.setUsername(USERNAME);
+            dataSource.setPassword(PASSWORD);
 
-        jdbcTemplate = new JdbcTemplate(dataSource);
-        
-        System.out.println("Connected database");
+            jdbcTemplate = new JdbcTemplate(dataSource);
+
+            System.out.println("Connected database");
+        } catch(Exception ex) {
+            System.out.println("Deu ruim na sua conexão com o banco: "+ex.getMessage());
+        }
     }
 }
