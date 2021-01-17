@@ -1,8 +1,8 @@
-package br.com.estoque;
+package estoque.DTO;
 
 public class Categoria {
     protected Integer idCategoria;
-    protected String categoria;
+    protected String nomeCategoria;
 
     public Integer getIdCategoria() {
         return idCategoria;
@@ -12,15 +12,17 @@ public class Categoria {
         this.idCategoria = idCategoria;
     }
 
-    public String getCategoria() {
-        return categoria;
+    public String getNomeCategoria() {
+        return nomeCategoria;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setNomeCategoria(String nomeCategoria) {
+        this.nomeCategoria = nomeCategoria;
+    }
+
+    @Override
+    public String toString() {
+        return this.nomeCategoria;
     }
     
-    public String toString() {
-        return this.categoria;
-    }
 }

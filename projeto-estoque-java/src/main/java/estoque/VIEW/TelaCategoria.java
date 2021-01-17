@@ -3,7 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.estoque;
+package estoque.VIEW;
+
+import estoque.DAO.ConectarBanco;
+import estoque.VIEW.TelaInicio;
+import java.awt.Color;
+import java.awt.Toolkit;
 
 /**
  *
@@ -27,43 +32,130 @@ public class TelaCategoria extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btVoltar = new javax.swing.JButton();
+        lbVoltar = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        btCadastro = new javax.swing.JButton();
+        lbCadastroConcluido = new javax.swing.JLabel();
+        tfNomeCategoria = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastro de Categorias");
+        setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - 770) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - 770) / 2);
 
-        btVoltar.setText("Voltar");
-        btVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btVoltarActionPerformed(evt);
+        lbVoltar.setIcon(new javax.swing.ImageIcon("C:\\Users\\kaiob\\OneDrive\\Documentos\\bandtec\\projeto-estoque\\projeto-estoque-java\\src\\main\\java\\estoque\\ICONS\\left-arrow-64.png")); // NOI18N
+        lbVoltar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbVoltarMouseClicked(evt);
             }
         });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel2.setText("Cadastro de novas categorias");
+
+        jLabel3.setText("Nome da categoria:");
+
+        btCadastro.setText("Cadastrar Categoria");
+        btCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadastroActionPerformed(evt);
+            }
+        });
+
+        lbCadastroConcluido.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbCadastroConcluido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbCadastroConcluido.setText("Verifique corretamente antes de continuar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(btVoltar)
-                .addContainerGap(935, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(290, 290, 290)
+                        .addComponent(btCadastro))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbCadastroConcluido, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lbVoltar)
+                                .addGap(63, 63, 63)
+                                .addComponent(jLabel2))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(215, 215, 215)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                            .addComponent(tfNomeCategoria))))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(btVoltar)
-                .addContainerGap(622, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(lbVoltar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(jLabel2)))
+                .addGap(116, 116, 116)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(tfNomeCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(94, 94, 94)
+                .addComponent(btCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77)
+                .addComponent(lbCadastroConcluido, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(201, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
+    ConectarBanco conexao = new ConectarBanco();
+    
+    private void btCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroActionPerformed
         // TODO add your handling code here:
-        TelaInicio home = new TelaInicio();
-        home.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_btVoltarActionPerformed
+        try{
+            String nomeCategoria = tfNomeCategoria.getText();
+            System.out.println(nomeCategoria);
+            if (nomeCategoria.isEmpty()) {
+                throw new NullPointerException();
+            } else {
+//                conexao.conectar();
+//                conexao.jdbcTemplate.update(String.format(
+//                            "insert into categoria values (null, '%s')",
+//                                nomeCategoria
+//                        ));
+                lbCadastroConcluido.setText("Cadastro concluído");
+                lbCadastroConcluido.setForeground(Color.green);
+                System.out.println("Cadastro concluído");
+            }
+        } catch (Exception ex) {
+            System.out.println("Houve problema no cadastro da categoria:\n"
+                +ex.getMessage());
+            lbCadastroConcluido.setText(
+                    "Houve problema no cadastro da categoria.");
+            lbCadastroConcluido.setForeground(Color.red);
+        }
+    }//GEN-LAST:event_btCadastroActionPerformed
+
+    private void lbVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbVoltarMouseClicked
+        // TODO add your handling code here:
+        try {
+            TelaInicio inicio = new TelaInicio();
+            inicio.setVisible(true);
+            dispose();
+        } catch (Exception ex) {
+            System.out.println(
+                    "Houve Problema ao voltar para o início:\n"
+                            +ex.getMessage());
+        }
+    }//GEN-LAST:event_lbVoltarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -101,6 +193,11 @@ public class TelaCategoria extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btVoltar;
+    private javax.swing.JButton btCadastro;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel lbCadastroConcluido;
+    private javax.swing.JLabel lbVoltar;
+    private javax.swing.JTextField tfNomeCategoria;
     // End of variables declaration//GEN-END:variables
 }

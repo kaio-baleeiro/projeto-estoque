@@ -3,7 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.estoque;
+package estoque.VIEW;
+
+import estoque.DAO.ConectarBanco;
+import estoque.DTO.Categoria;
+import estoque.VIEW.TelaInicio;
+import java.awt.Color;
+import java.awt.Toolkit;
+import java.util.List;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 /**
  *
@@ -27,43 +35,173 @@ public class TelaProduto extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btVoltar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        tfNomeProduto = new javax.swing.JTextField();
+        tfCategoriaProduto = new javax.swing.JTextField();
+        tfAbastecimentoProduto = new javax.swing.JTextField();
+        tfLimiteMinProduto = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        btCadastrarProduto = new javax.swing.JButton();
+        lbCadastroConcluido = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastro de Produtos");
+        setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - 780) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - 771) / 2);
 
-        btVoltar.setText("Voltar");
-        btVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btVoltarActionPerformed(evt);
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\kaiob\\OneDrive\\Documentos\\bandtec\\projeto-estoque\\projeto-estoque-java\\icons\\left-arrow-64.png")); // NOI18N
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
             }
         });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel2.setText("Cadastro de novos produtos");
+
+        jLabel3.setText("Nome do produto:");
+
+        jLabel4.setText("Categoria do produto:");
+
+        jLabel5.setText("Quantidade de abastecimento do produto:");
+
+        jLabel7.setText("Quantidade mínima de estoque do Produto:");
+
+        btCadastrarProduto.setText("Cadastrar Produto");
+        btCadastrarProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btCadastrarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadastrarProdutoActionPerformed(evt);
+            }
+        });
+
+        lbCadastroConcluido.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbCadastroConcluido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbCadastroConcluido.setText("Verifique todas as informações antes de continuar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btCadastrarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(287, 287, 287))
             .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(btVoltar)
-                .addContainerGap(974, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(232, 232, 232)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(tfLimiteMinProduto)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tfNomeProduto)
+                                .addComponent(tfCategoriaProduto)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tfAbastecimentoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(jLabel1)
+                        .addGap(72, 72, 72)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(lbCadastroConcluido, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(btVoltar)
-                .addContainerGap(756, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(50, 50, 50))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(42, 42, 42)))
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(tfNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(tfCategoriaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addComponent(tfAbastecimentoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
+                .addGap(18, 18, 18)
+                .addComponent(tfLimiteMinProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addComponent(btCadastrarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(lbCadastroConcluido, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(117, 117, 117))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         // TODO add your handling code here:
         TelaInicio home = new TelaInicio();
         home.setVisible(true);
         dispose();
-    }//GEN-LAST:event_btVoltarActionPerformed
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    ConectarBanco conexao = new ConectarBanco();
+    
+    private void btCadastrarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarProdutoActionPerformed
+        // TODO add your handling code here:
+        try {
+            String nomeProduto = tfNomeProduto.getText();
+            String categoriaProduto = tfCategoriaProduto.getText();
+            Integer abastecimento = Integer.valueOf(tfAbastecimentoProduto.getText());
+            Integer limiteMin = Integer.valueOf(tfLimiteMinProduto.getText());
+            
+            if (nomeProduto.isEmpty() || categoriaProduto.isEmpty()) {
+                throw new NullPointerException();
+            } else if (abastecimento <= 0 || limiteMin <= 0) {
+                throw new IllegalArgumentException();
+            } else {
+                conexao.conectar();
+
+                List<Categoria> categoriaFK = conexao.jdbcTemplate.query(
+                    "select * from categoria where nomeCategoria=?",
+                        new BeanPropertyRowMapper(Categoria.class) ,categoriaProduto
+                );
+
+                for (Categoria ct : categoriaFK) {
+                    ConectarBanco.jdbcTemplate.update(String.format(
+                        "insert into produto values (null, '%s', %d, %d, %d, %d)",
+                            nomeProduto, ct.getIdCategoria(), abastecimento, 
+                            abastecimento, limiteMin
+                    ));
+                }
+
+                System.out.println("Cadastro concluído");
+                lbCadastroConcluido.setText(
+                        "O Cadastro do Produto "+nomeProduto+" está concluído");
+                lbCadastroConcluido.setForeground(Color.green);
+            }
+        } catch (Exception ex) {
+            System.out.println("Houve problema no cadastro:\n"+ex.getMessage());
+            lbCadastroConcluido.setText(
+                "Houve problema no cadastro do novo produto.");
+            lbCadastroConcluido.setForeground(Color.red);
+        }
+        
+    }//GEN-LAST:event_btCadastrarProdutoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -101,6 +239,17 @@ public class TelaProduto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btVoltar;
+    private javax.swing.JButton btCadastrarProduto;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel lbCadastroConcluido;
+    private javax.swing.JTextField tfAbastecimentoProduto;
+    private javax.swing.JTextField tfCategoriaProduto;
+    private javax.swing.JTextField tfLimiteMinProduto;
+    private javax.swing.JTextField tfNomeProduto;
     // End of variables declaration//GEN-END:variables
 }

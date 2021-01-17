@@ -1,5 +1,6 @@
-package br.com.estoque;
+package estoque.DAO;
 
+import estoque.DTO.Movimentacao;
 import java.util.List;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -9,8 +10,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 public class LineChart {
     
-    ConectarBanco conexaoChart = new ConectarBanco();
-    JFreeChart chart;
+    protected ConectarBanco conexaoChart = new ConectarBanco();
+    public JFreeChart chart;
     
     public void dataset(String nome) {
         try {
@@ -19,7 +20,13 @@ public class LineChart {
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
             List<Movimentacao> movimentacao = conexaoChart.jdbcTemplate.query(
-                "SELECT * FROM (SELECT quantidade, nome, momento FROM movimentacao, produto WHERE nome = ? AND fkProduto=idProduto ORDER BY momento DESC LIMIT 7) sele ORDER BY momento ASC", 
+                "select * from (select nome, sum(quantidade) as quantidade, "
+                +"dayname(momento) as momento, date_format(momento, '%Y-%m-%d')"
+                +" as dataComp from movimentacao, produto where "
+                +"nome = ? and fkProduto=idProduto and quantidade<6"
+                +" and momento between date_format(current_date()-7, '%Y-%m-%d')"
+                +" and date_format(current_date()+1, '%Y-%m-%d') group by "
+                +"dataComp order by dataComp desc limit 7) sele order by dataComp asc;", 
                 new BeanPropertyRowMapper(Movimentacao.class), nome);
 
             for (Movimentacao mov : movimentacao) {
@@ -29,15 +36,15 @@ public class LineChart {
 
             chart = ChartFactory.createLineChart(
                     "Grafico de movimentação de\n"+nome,
-                    "Momento",
-                    "Quantidade de Produtos",
+                    "Dia",
+                    "Quantidade total de Produtos",
                     dataset,
                     PlotOrientation.VERTICAL,
                     true,
                     true,
                     false);
         } catch (Exception ex) {
-            System.out.println("Deu ruim na criação do line chart"+ex.getMessage());
+            System.out.println("Problema na criação do line chart"+ex.getMessage());
         }
     }
 }

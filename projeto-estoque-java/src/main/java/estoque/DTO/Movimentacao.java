@@ -1,9 +1,10 @@
-package br.com.estoque;
+package estoque.DTO;
 
 public class Movimentacao {
-    protected Integer quantidade;
-    protected String nome;
-    protected String momento;
+    private Integer quantidade;
+    private String nome;
+    private String momento;
+    private String dataComp;
 
     public Integer getQuantidade() {
         return quantidade;
@@ -27,5 +28,13 @@ public class Movimentacao {
 
     public void setMomento(String momento) {
         this.momento = momento;
+    }
+
+    public String getDataComp() {
+        return dataComp;
+    }
+
+    public void setDataComp(String dataComp) {
+        this.dataComp = dataComp;
     }
 }

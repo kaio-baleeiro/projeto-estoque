@@ -1,4 +1,4 @@
-package br.com.estoque;
+package estoque.DTO;
 
 public class Produto {
     protected Integer idProduto;

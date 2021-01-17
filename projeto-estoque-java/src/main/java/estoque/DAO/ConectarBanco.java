@@ -1,10 +1,10 @@
-package br.com.estoque;
+package estoque.DAO;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class ConectarBanco {
-    protected static JdbcTemplate jdbcTemplate;
+    public static JdbcTemplate jdbcTemplate;
     protected static BasicDataSource dataSource;
 
     protected final static String DRIVE = "com.mysql.jdbc.Driver";
