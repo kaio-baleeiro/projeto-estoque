@@ -30,4 +30,6 @@ while True:
 
         cont+=1
 
+    print("Finalizado!")
+
     time.sleep(17.6468)

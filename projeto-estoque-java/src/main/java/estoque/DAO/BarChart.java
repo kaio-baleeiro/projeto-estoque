@@ -33,7 +33,7 @@ public class BarChart {
             }
             
             barChart = ChartFactory.createBarChart(
-                    "", "Total", "Produtos", dataset, PlotOrientation.VERTICAL, 
+                    "", "Produtos", "Total", dataset, PlotOrientation.VERTICAL, 
                     true, true, false);
 
         } catch (Exception ex) {
